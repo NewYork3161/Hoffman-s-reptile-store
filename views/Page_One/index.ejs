@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoffman's Reptile Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/CSS/index_style.css">
+  <link rel="stylesheet" href="/CSS/index_body_introduction.css">
+  <link rel="stylesheet" href="/CSS/index_midbody_section.css">
+  <link rel="stylesheet" href="/CSS/GridGallery.css">
+  <link rel="icon" type="image/png" href="/image/Logo.png">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white border-bottom">
+    <div class="container-fluid">
+      <div class="navbar-brand d-flex align-items-center">
+        <img src="/image/Logo.png" alt="Logo" width="48" height="48" class="me-2">
+        <strong>Hoffman's Reptile Shop</strong>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/carousel">Animals</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Carousel -->
+  <% if (images && images.length > 0) { %>
+    <div class="main-carousel-wrapper">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <% images.forEach((img, idx) => { %>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= idx %>"
+              class="<%= idx === 0 ? 'active' : '' %>" aria-current="<%= idx === 0 ? 'true' : 'false' %>"
+              aria-label="Slide <%= idx + 1 %>"></button>
+          <% }) %>
+        </div>
+
+        <div class="carousel-inner">
+          <% images.forEach((img, idx) => { %>
+            <div class="carousel-item <%= idx === 0 ? 'active' : '' %>">
+              <img src="<%= img.image || 'https://via.placeholder.com/1200x500?text=Reptile+Image' %>" class="d-block w-100" alt="<%= img.description || 'Image' %>">
+              <% if (img.description) { %>
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                  <h5><%= img.description %></h5>
+                </div>
+              <% } %>
+            </div>
+          <% }) %>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="container text-center py-5">
+      <h3>No carousel images available.</h3>
+    </div>
+  <% } %>
+
+  <!-- Body Intro -->
+  <section class="body-introduction">
+    <h2>Welcome to Hoffman's Reptile Shop</h2>
+    <p>
+      Discover an incredible selection of exotic reptiles, amphibians, and unique creatures from around the globe. Whether you're a new enthusiast or an experienced reptile keeper, our shop offers expert advice and rare animals you won’t find anywhere else. Come visit and explore the wild with us!
+    </p>
+  </section>
+
+  <!-- Midbody Section -->
+  <% if (midbodyContent) { %>
+    <section class="midbody-section">
+      <div class="midbody-container">
+        <div class="midbody-image">
+          <img src="<%= midbodyContent.image || 'https://via.placeholder.com/600x400' %>" alt="Midbody Image">
+        </div>
+        <div class="midbody-text">
+          <h2><%= midbodyContent.title || 'Explore More' %></h2>
+          <p><%= midbodyContent.description || 'Our mid-section showcases featured animals and in-store events.' %></p>
+        </div>
+      </div>
+    </section>
+  <% } else { %>
+    <section class="midbody-section text-center">
+      <p>No midbody content available.</p>
+    </section>
+  <% } %>
+
+  <!-- Category Nav -->
+  <section class="category-nav-section">
+    <div class="category-nav">
+      <a href="#" class="category-link active">Snakes</a>
+      <a href="#" class="category-link">Lizards</a>
+      <a href="#" class="category-link">Turtles</a>
+      <a href="#" class="category-link">Frogs</a>
+      <a href="#" class="category-link">Supplies</a>
+      <a href="#" class="category-link">Feeders</a>
+      <a href="#" class="category-link">Services</a>
+      <div class="underline"></div>
+    </div>
+    <p class="category-description">
+      From ball pythons to rare cobras, Hoffman's Reptile Shop works with trusted breeders across the U.S. If we don’t carry what you’re looking for, we’ll help you track it down.
+    </p>
+  </section>
+
+  <!-- Grid Gallery -->
+  <section id="animal-gallery-grid" class="gallery-section">
+    <div class="gallery-grid">
+      <% if (gridSections && gridSections.length > 0) { %>
+        <% gridSections.forEach((section, index) => { %>
+          <img src="<%= section.image || 'https://via.placeholder.com/300x300' %>" alt="<%= section.title || 'Animal' %>">
+        <% }) %>
+      <% } else { %>
+        <div class="text-center">
+          <p>No gallery images available.</p>
+        </div>
+      <% } %>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section style="background-color: #f8f9fa; padding: 60px 0;">
+    <div class="container text-center">
+      <h2 class="mb-5" style="letter-spacing: 6px; font-weight: 600;">Hoffman's Reptile Shop</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <p class="fs-5 text-muted">"At Hoffman's Reptile Shop, we treat every cold-blooded critter like family."</p>
+          <p class="fs-5 text-muted">Come visit us — your next scaly friend might be waiting!</p>
+          <div class="d-flex align-items-center justify-content-center mt-4">
+            <img src="/image/Logo.png" alt="user" width="64" height="64" class="me-3" style="border-radius: 50%;">
+            <div class="text-start"><small class="text-muted">Concord, CA</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="background-color: #f7f7f7; padding: 60px 0;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h4 class="mb-4 text-center">SEND A MESSAGE</h4>
+          <form method="POST" action="/send-message">
+            <div class="mb-3"><input type="text" name="name" class="form-control" placeholder="Your Name" required></div>
+            <div class="mb-3"><input type="email" name="email" class="form-control" placeholder="Email Address" required></div>
+            <div class="mb-3"><textarea name="message" class="form-control" rows="5" placeholder="Message" required></textarea></div>
+            <button type="submit" class="btn btn-success w-100">SEND MESSAGE</button>
+          </form>
+        </div>
+        <div class="col-md-6 mt-4 mt-md-0">
+          <iframe src="https://www.google.com/maps?q=2359+Concord+Blvd,+Concord,+CA+94520&output=embed"
+            width="100%" height="320" frameborder="0" style="border:0;" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background-color: #4caf50; color: white; text-align: center; padding: 40px 20px;">
+    <p style="font-size: 1.2em; font-weight: bold;">Hoffmann's Reptile Shop</p>
+    <p>2359 Concord Blvd, Concord, CA 94520</p>
+    <p>(925) 671-9106</p>
+    <p>© <span id="year"></span> Hoffmann's Reptile Shop. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const links = document.querySelectorAll('.category-link');
+    const underline = document.querySelector('.underline');
+    function updateUnderline(el) {
+      const rect = el.getBoundingClientRect();
+      const parentRect = el.parentElement.getBoundingClientRect();
+      underline.style.width = `${rect.width}px`;
+      underline.style.left = `${rect.left - parentRect.left}px`;
+    }
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => updateUnderline(link));
+    });
+    if (links.length) updateUnderline(links[0]);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

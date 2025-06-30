@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel Image</title>
+</head>
+
+<body>
+    <h1>Carousel Image Detail</h1>
+
+    <img src="<%= image.image %>" alt="carousel image" width="400">
+    <p><strong>Description:</strong> <%= image.description %></p>
+
+    <a href="/carousel">← Back to All Images</a>
+    <a href="/carousel/<%= image._id %>/edit">✏️ Edit</a>
+
+    <form action="/carousel/<%= image._id %>?_method=DELETE" method="POST" style="display:inline;">
+        <button>🗑️ Delete</button>
+    </form>
+</body>
+
+</html>

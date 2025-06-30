@@ -1,0 +1,22 @@
+.body-introduction {
+    height: calc(100vh - 70px); /* Full screen minus navbar height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    background-color: white;
+}
+
+.body-introduction h2 {
+    font-size: 2.5rem;
+    color: #2eb85c;
+    margin-bottom: 20px;
+}
+
+.body-introduction p {
+    font-size: 1.25rem;
+    max-width: 800px;
+    color: #444;
+}

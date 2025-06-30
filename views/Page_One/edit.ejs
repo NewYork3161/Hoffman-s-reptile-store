@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Carousel Image</title>
+</head>
+
+<body>
+    <h1>Edit Carousel Image</h1>
+    <form action="/carousel/<%= image._id %>?_method=PUT" method="POST">
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" placeholder="Enter image description" value="<%= image.description %>">
+
+        <label for="image">Image URL</label>
+        <input type="text" name="image" id="image" placeholder="Enter image URL" value="<%= image.image %>">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <a href="/carousel/<%= image._id %>">Cancel</a>
+</body>
+
+</html>

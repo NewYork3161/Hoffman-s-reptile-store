@@ -1,0 +1,8 @@
+# Node.js standard ignore list
+node_modules/
+.env
+*.log
+.DS_Store
+npm-debug.log
+dist/
+tmp/

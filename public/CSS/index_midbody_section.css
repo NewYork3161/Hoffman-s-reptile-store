@@ -1,0 +1,55 @@
+.midbody-section {
+    height: calc(100vh - 70px); /* Full screen minus navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.midbody-container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.midbody-image img {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.midbody-text {
+    flex: 1;
+    padding-left: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.midbody-text h2 {
+    font-size: 2rem;
+    color: #444;
+    margin: 0;
+}
+
+/* New styling for split text format */
+.midbody-text h2 span.title {
+    display: block;
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.midbody-text h2 span.description {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.6;
+}
