@@ -15,7 +15,6 @@ const MidbodyImage = require('./models/midbody_image');
 const GridImageSection = require('./models/grid_image_model');
 const BodyText = require('./models/BodyTextSchema');
 
-// ✅ TEST the env is working
 console.log("🌐 Loaded MONGO_URI:", process.env.MONGO_URI || 3000);
 
 // MongoDB Connection
@@ -107,6 +106,7 @@ app.get('/grid/new', async (req, res) => {
         res.status(500).send("Error loading grid image form.");
     }
 });
+
 app.get('/carousel/new', async (req, res) => {
     try {
         const images = await CarouselImage.find({}).sort({ _id: 1 });
@@ -199,6 +199,11 @@ app.post('/send-message', async (req, res) => {
 
 app.get('/confirmation', (req, res) => {
     res.render('confirmation');
+});
+
+/* ---------- ✅ SITEMAP ROUTE ---------- */
+app.get('/sitemap.xml', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
 });
 
 app.listen(3000, () => {
