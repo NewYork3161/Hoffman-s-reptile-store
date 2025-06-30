@@ -16,7 +16,7 @@ const GridImageSection = require('./models/grid_image_model');
 const BodyText = require('./models/BodyTextSchema');
 
 // ✅ TEST the env is working
-console.log("🌐 Loaded MONGO_URI:", process.env.MONGO_URI);
+console.log("🌐 Loaded MONGO_URI:", process.env.MONGO_URI || 3000);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
@@ -25,6 +25,7 @@ mongoose.connect(process.env.MONGO_URI, {
 })
 .then(() => console.log("✅ MONGO CONNECTION OPEN TO hoffmans_reptile_store"))
 .catch(err => console.log("❌ MONGO CONNECTION ERROR:", err));
+
 app.set('views', path.join(__dirname, 'views', 'Page_One'));
 app.set('view engine', 'ejs');
 
@@ -85,6 +86,49 @@ app.put('/body-introduction/:id', async (req, res) => {
         console.error("❌ Error updating section:", err);
         res.status(500).send("Failed to update section.");
     }
+});
+
+app.get('/midbody/new', async (req, res) => {
+    try {
+        const content = await MidbodyImage.findOne().sort({ _id: -1 });
+        res.render('MidbodyNewForm', { content });
+    } catch (err) {
+        console.error("❌ Error loading midbody content:", err);
+        res.status(500).send("Error loading midbody form.");
+    }
+});
+
+app.get('/grid/new', async (req, res) => {
+    try {
+        const gridSections = await GridImageSection.find({}).sort({ _id: 1 });
+        res.render('GridImageNewForm', { gridSections });
+    } catch (err) {
+        console.error("❌ Error loading grid sections:", err);
+        res.status(500).send("Error loading grid image form.");
+    }
+});
+app.get('/carousel/new', async (req, res) => {
+    try {
+        const images = await CarouselImage.find({}).sort({ _id: 1 });
+        res.render('carouselupdate', { images });
+    } catch (err) {
+        console.error("❌ Error loading carousel images:", err);
+        res.status(500).send("Error loading carousel update page.");
+    }
+});
+
+app.post('/midbody', upload.single('image'), async (req, res) => {
+    const { title, description } = req.body;
+    const image = '/uploads/' + req.file.filename;
+    await MidbodyImage.create({ title, description, image });
+    res.redirect('/');
+});
+
+app.post('/grid', upload.single('image'), async (req, res) => {
+    const { title, description } = req.body;
+    const image = '/uploads/' + req.file.filename;
+    await GridImageSection.create({ title, description, image });
+    res.redirect('/');
 });
 
 app.post('/send-message', async (req, res) => {
